@@ -12,15 +12,19 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # Configurações gerais
-os.chdir(os.path.dirname(__file__))
+base_dir = os.path.dirname(__file__)
+dados_dir = os.path.join(base_dir, "dados")
+output_dir = os.path.join(base_dir, "output")
+
+os.makedirs(output_dir, exist_ok=True)
 plt.style.use('seaborn-v0_8-whitegrid')
 
 # ---------------- 1. Leitura e integração ---------------- #
 print("Lendo arquivos...")
 
-df_pedido = pd.read_excel('PEDIDO-_1_.xlsx')
-df_item_pedido = pd.read_excel('ITEM_PEDIDO-_2_.xlsx')
-df_itens = pd.read_excel('ITENS-_3_.xlsx')
+df_pedido = pd.read_excel(os.path.join(dados_dir, 'PEDIDO-_1_.xlsx'))
+df_item_pedido = pd.read_excel(os.path.join(dados_dir, 'ITEM_PEDIDO-_2_.xlsx'))
+df_itens = pd.read_excel(os.path.join(dados_dir, 'ITENS-_3_.xlsx'))
 
 df_pedido.columns = ['id', 'id_pedido', 'data', 'valor_total'][:len(df_pedido.columns)]
 df_item_pedido.columns = ['id', 'id_pedido', 'id_item', 'quantidade'][:len(df_item_pedido.columns)]
@@ -36,8 +40,9 @@ df['data'] = pd.to_datetime(df['data'])
 
 df['valor_total'] = df['quantidade'] * df['valor_item']
 
-df.to_excel('saida_final.xlsx', index=False)
-print("Bases integradas e salvas em 'saida_final.xlsx'.")
+saida_final_path = os.path.join(output_dir, 'saida_final.xlsx')
+df.to_excel(saida_final_path, index=False)
+print(f"Bases integradas e salvas em '{saida_final_path}'.")
 
 # ---------------- 2. Análise Exploratória ---------------- #
 print("\n--- Análise Exploratória ---")
@@ -119,5 +124,6 @@ plt.show()
 # ---------------- 7. Exportação ---------------- #
 result = test_df.copy()
 result['Prev_Linear'] = y_pred
-result.to_excel('previsoes_modelo_linear.xlsx', index=False)
-print("\nArquivo 'previsoes_modelo_linear.xlsx' salvo com sucesso.")
+previsoes_path = os.path.join(output_dir, 'previsoes_modelo_linear.xlsx')
+result.to_excel(previsoes_path, index=False)
+print(f"\nArquivo '{previsoes_path}' salvo com sucesso.")
