@@ -66,7 +66,7 @@ O código está dividido em várias etapas, cada uma com uma funcionalidade espe
   - scikit-learn
 
 ## Como Executar
-1. Certifique-se de que os arquivos de entrada (`PEDIDO-_1_.xlsx`, `ITEM_PEDIDO-_2_.xlsx`, `ITENS-_3_.xlsx`) estão na mesma pasta que o script.
+1. Certifique-se de que os arquivos de entrada (`PEDIDO-_1_.xlsx`, `ITEM_PEDIDO-_2_.xlsx`, `ITENS-_3_.xlsx`) estão na pasta dados.
 2. Instale as dependências necessárias:
    ```bash
    pip install -r requirements.txt
