@@ -66,10 +66,10 @@ plt.xlabel('Data')
 plt.ylabel('Quantidade Total Vendida')
 plt.show()
 
-# Top 10 produtos mais vendidos
+# Top 4 produtos mais vendidos
 plt.figure(figsize=(8, 4))
-df.groupby('id_item')['quantidade'].sum().sort_values(ascending=False).head(10).plot(kind='bar')
-plt.title('Top 10 Itens Mais Vendidos')
+df.groupby('id_item')['quantidade'].sum().sort_values(ascending=False).head(4).plot(kind='bar')
+plt.title('Top 4 Itens Mais Vendidos')
 plt.xlabel('ID do Item')
 plt.ylabel('Quantidade Total')
 plt.show()
